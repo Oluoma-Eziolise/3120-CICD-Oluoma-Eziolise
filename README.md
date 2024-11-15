@@ -89,7 +89,7 @@ The workflow builds and pushes a new image to Dockerhub.
 - Once the image is built, it will be pushed to Dockerhub with the tag `username/repoName:tag`.
 
 ## CD Project Overview
-This part of the project uses workflows to introduce version control to the images uploaded to Dockerhub. It also webhooks to automatically roll out image updates to servers hosting the site content.  
+This part of the project uses workflows to introduce version control to the images uploaded to Dockerhub. It also uses webhooks to automatically roll out image updates to servers hosting the site content.  
 Here is a high-level diagram of the continuous deployment process featuring one sassy server:  
 ![CD Diagram](/images/CD_Diagram.PNG)
 ## Semantic Versioning
@@ -124,7 +124,7 @@ To install [adnanh's `webhook`](https://github.com/adnanh/webhook) use the follo
 ```
 sudo apt-get install webhook
 ```  
-To get webhook to start, the path `/etc/webhook.conf` needs to exist. For the webhook to actually do something, create a hook in the /etc/webhook.conf file. Once the specified path exists and the hook is created, webhook should start up once the system boots as well as start listening for messages if the hook is configured properly.
+To get webhook to start, the path `/etc/webhook.conf` needs to exist. For the webhook to actually do something, create a hook in the /etc/webhook.conf file. Once the specified path exists and the hook is created, the webhook should start up once the system boots as well as start listening for messages if it is configured properly.
 
 ### Webhook Task Definition File
 The Webhook task definition file is a JSON file called [hooks.json](/deployment/hooks.json). The hook for this project is called `my-chicken`, and it runs the restart.sh script and sets the working directory to be /var/webhook (NOTE: /var/webhook likely will not automaticlly exist on the system and you might have to create it yourself). To replicate this, place the contents of [hooks.json](/deployment/hooks.json) in the file `/etc/webhook.conf`.
